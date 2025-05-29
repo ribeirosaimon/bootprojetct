@@ -29,6 +29,7 @@ func NewShortener() *shortenerController {
 }
 
 func (h *shortenerController) ShortenerUrl(ctx *gin.Context) {
-
+	//TODO
+	h.shortenerService.ShortenerUrl(ctx)
 	return
 }
