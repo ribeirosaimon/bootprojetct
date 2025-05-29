@@ -13,6 +13,9 @@ var (
 	err              error
 )
 
+type BootProjectConnection interface {
+	GetConnection() *sql.DB
+}
 type MysqlOption func(*mysqlConfig)
 
 type mysqlConfig struct {
@@ -58,4 +61,8 @@ func NewMysqlConnection(opts ...MysqlOption) *mysqlConnection {
 		}
 	})
 	return _mysqlConnection
+}
+
+func (m *mysqlConnection) GetConnection() *sql.DB {
+	return m.Connection
 }

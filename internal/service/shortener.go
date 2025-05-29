@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"github.com/ribeirosaimon/bootprojetct/internal/model/entity"
+	"github.com/ribeirosaimon/bootprojetct/internal/repository"
 	"sync"
 )
 
@@ -15,16 +17,19 @@ type Shortener interface {
 }
 
 type shortenerService struct {
+	shortenerRepository repository.Shortener
 }
 
 func NewShortener() *shortenerService {
 	_onceShortener.Do(func() {
-		_shortenerService = &shortenerService{}
+		_shortenerService = &shortenerService{
+			shortenerRepository: repository.NewShortener(),
+		}
 	})
 	return _shortenerService
 }
 
 func (h *shortenerService) ShortenerUrl(ctx context.Context) {
-
+	h.shortenerRepository.ShortenerUrl(ctx, entity.ShortenerUrl{})
 	return
 }
