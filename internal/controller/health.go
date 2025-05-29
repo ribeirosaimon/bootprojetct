@@ -10,14 +10,14 @@ var (
 	_healthController *healthController
 )
 
-type HealthController interface {
+type Health interface {
 	GetHealth(ctx *gin.Context)
 }
 
 type healthController struct {
 }
 
-func NewHealthController() *healthController {
+func NewHealth() *healthController {
 	_onceHealth.Do(func() {
 		_healthController = &healthController{}
 	})
