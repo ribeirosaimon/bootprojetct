@@ -6,13 +6,13 @@ import (
 )
 
 type ShortenerUrl struct {
-	ID         uuid.UUID
-	ShortCode  string
-	Original   string
-	Clicks     int64
-	CreatedBy  string
-	IsActive   bool
-	CreatedAt  time.Time
-	ExpiresAt  time.Time
-	LastAccess time.Time
+	ID         uuid.UUID `json:"id"`
+	ShortCode  string    `json:"short_code"`
+	Original   string    `json:"original"`
+	Clicks     int64     `json:"clicks"`
+	CreatedBy  string    `json:"created_by"`
+	IsActive   bool      `json:"is_active"`
+	CreatedAt  time.Time `json:"created_at"`
+	ExpiredAt  time.Time `json:"expired_at"`
+	LastAccess time.Time `json:"last_access"`
 }

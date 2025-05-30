@@ -21,6 +21,8 @@ type MysqlOption func(*mysqlConfig)
 type mysqlConfig struct {
 	url      string
 	database string
+	entry    string
+	host     string
 }
 
 type mysqlConnection struct {
@@ -40,10 +42,18 @@ func WithUrl(url string) MysqlOption {
 	}
 }
 
+func WithHost(host string) MysqlOption {
+	return func(cfg *mysqlConfig) {
+		cfg.host = host
+	}
+}
+
 func defaultMysqlConfig() *mysqlConfig {
 	return &mysqlConfig{
-		url:      "user:userpassword@tcp(localhost:3306)",
-		database: "encurtador",
+		url:      "myuser:mypass@tcp",
+		database: "shortener",
+		entry:    "static/migrations",
+		host:     "localhost:3306",
 	}
 }
 
@@ -54,8 +64,8 @@ func NewMysqlConnection(opts ...MysqlOption) *mysqlConnection {
 		for _, o := range opts {
 			o(cfg)
 		}
-
-		_mysqlConnection.Connection, err = sql.Open("mysql", fmt.Sprintf("%s/%s", cfg.url, cfg.database))
+		host := fmt.Sprintf("%s(%s)/%s", cfg.url, cfg.host, cfg.database)
+		_mysqlConnection.Connection, err = sql.Open("mysql", host)
 		if err != nil {
 			panic(err)
 		}

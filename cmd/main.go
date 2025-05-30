@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"github.com/ribeirosaimon/bootprojetct/internal/infra/database"
 	"github.com/ribeirosaimon/bootprojetct/internal/infra/server"
 	"github.com/ribeirosaimon/bootprojetct/web"
 	"os"
@@ -11,6 +13,9 @@ func main() {
 	if p := os.Getenv("PORT"); p != "" {
 		port = p
 	}
+
+	connection := database.NewMysqlConnection()
+	connection.RunMigrations(context.Background())
 
 	server.New(
 		server.WithPort(port),
