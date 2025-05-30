@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/ribeirosaimon/bootprojetct/internal/infra/server"
+	"github.com/ribeirosaimon/bootprojetct/web"
 	"os"
 )
 
@@ -11,5 +12,9 @@ func main() {
 		port = p
 	}
 
-	server.New(server.WithPort(port))
+	server.New(
+		server.WithPort(port),
+	).Start(
+		web.StartHandlers,
+	)
 }

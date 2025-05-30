@@ -9,6 +9,7 @@ var _bootProjectServer *bootProjectServer
 
 type bootProjectServer struct {
 	engine *gin.Engine
+	port   string
 }
 
 type serverOption func(*serverConfig)
@@ -34,13 +35,19 @@ func New(config ...serverOption) *bootProjectServer {
 	for _, o := range config {
 		o(cfg)
 	}
-	_bootProjectServer = &bootProjectServer{}
-	_bootProjectServer.engine = gin.Default()
-	_bootProjectServer.startHandlers()
-
-	if err := _bootProjectServer.engine.Run(fmt.Sprintf(":%s", cfg.port)); err != nil {
-		panic(err)
+	_bootProjectServer = &bootProjectServer{
+		port: cfg.port,
 	}
+	_bootProjectServer.engine = gin.Default()
 
 	return _bootProjectServer
+}
+
+func (b *bootProjectServer) Start(f func(engine *gin.Engine)) {
+	// start routes
+	f(b.engine)
+
+	if err := _bootProjectServer.engine.Run(fmt.Sprintf(":%s", b.port)); err != nil {
+		panic(err)
+	}
 }
