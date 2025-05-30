@@ -1,5 +1,15 @@
 # bootprojetct
 
+
+# How to Run
+
+* Conferir se o Colima está rodando pelo terminal: `colima status`
+* caso não esteja : `colima start`
+* rodar um `docker-compose up`
+
+-----
+
+# Dicas
 * Adicionar uma rota:
  entre em: `web/handler.go`
   

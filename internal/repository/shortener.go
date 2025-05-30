@@ -30,5 +30,8 @@ func NewShortener() *shortenerRepository {
 }
 
 func (h *shortenerRepository) ShortenerUrl(ctx context.Context, url entity.ShortenerUrl) (*entity.ShortenerUrl, error) {
+
+	// TODO como executar as queries
+	// h.mysqlConnection.GetConnection().Query()
 	return nil, nil
 }
