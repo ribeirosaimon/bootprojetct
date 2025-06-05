@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ribeirosaimon/bootprojetct/web/http"
 	"sync"
 )
 
@@ -25,7 +26,7 @@ func NewHealth() *healthController {
 }
 
 func (h *healthController) GetHealth(ctx *gin.Context) {
-	ctx.JSON(200, gin.H{
+	http.NewResponse(ctx).Success(gin.H{
 		"status": "ok",
 	})
 	return

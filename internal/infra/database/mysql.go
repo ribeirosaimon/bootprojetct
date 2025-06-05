@@ -64,7 +64,7 @@ func NewMysqlConnection(opts ...MysqlOption) *mysqlConnection {
 		for _, o := range opts {
 			o(cfg)
 		}
-		host := fmt.Sprintf("%s(%s)/%s", cfg.url, cfg.host, cfg.database)
+		host := fmt.Sprintf("%s(%s)/%s?parseTime=true", cfg.url, cfg.host, cfg.database)
 		_mysqlConnection.Connection, err = sql.Open("mysql", host)
 		if err != nil {
 			panic(err)

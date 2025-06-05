@@ -10,5 +10,5 @@ func StartHandlers(e *gin.Engine) {
 	shortenerController := controller.NewShortener()
 
 	e.GET("/health", healthController.GetHealth)
-	e.POST("/shortener", shortenerController.ShortenerUrl)
+	e.POST("/shortener", shortenerController.GetShortenerUrl)
 }
